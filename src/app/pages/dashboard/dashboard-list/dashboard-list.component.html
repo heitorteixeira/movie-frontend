@@ -1,26 +1,35 @@
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" routerLink="/">Hmovie</a>
+    <form class="form-inline" >
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search" #search>
+        <button class="btn btn-outline-success my-2 my-sm-0" (click)="searchMovie()" type="button">Search</button>
+    </form>
+</nav>
 <div class="container">
-   <h4 class="text-center">Upcoming Movies</h4>
-    <hr>
+    <h4 class="text-center">Upcoming Movies</h4>
+    <div class="row"
+            infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()" 
+            style="overflow: scroll;">
 
-    <div class="row" 
-         infiniteScroll
-         [infiniteScrollDistance]="2"
-         [infiniteScrollThrottle]="50"
-         (scrolled)="onScroll()" 
-         style="overflow: scroll;">
-        <div class="col-md-3" *ngFor="let movie of movies">
-            <figure class="card card-movie">
-                <div class="img-wrap"><img src="{{imageUrl}}w185{{movie.posterPath}}"></div>
-                <figcaption class="info-wrap">
-                        <h5 class="title">{{movie.originalTitle}}</h5>
-                        <p class="desc">{{movie.releaseDate}}</p>
-                        <div class="rating-wrap">
-                            <div class="label-genre" *ngFor="let genre of movie.genres">{{genre.name}}</div>
-                        </div>
-                </figcaption>
-            </figure>
-        </div> 
-
+        <div class="col-lg-3 col-md-6" *ngFor="let movie of movies">
+            <div class="card card-cascade" >
+                <div class="view view-cascade overlay">
+                    <a (click)="selectMovie(movie)">
+                        <img src="{{imageUrl}}w185{{movie.posterPath}}" 
+                            class="card-img-top" 
+                            onError="this.src='assets/images/image-not-found.jpg';">
+                    </a>
+                    <div class="mask rgba-white-slight">{{movie.releaseDate}}</div>
+                    
+                </div>
+                <div class="card-body card-body-cascade text-center">
+                    <h4 class="card-title"><strong>{{movie.originalTitle}}</strong></h4>
+                    <i class="glyphicon small" *ngFor="let genre of movie.genres">{{genre.name + ' '}}</i>
+                </div>
+            </div>
+        </div>
     </div>
-
-</div> 
+</div>

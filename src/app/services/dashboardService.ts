@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 
 import { Observable, throwError } from "rxjs";
 
@@ -15,6 +15,23 @@ import { API_CONFIG } from "../../config/api.config";
 export class DashboardService {
 
   constructor(private http: HttpClient) {}
+
+  search(search: string): Observable<MovieDTO[]>{
+    const url = `${API_CONFIG.baseUrl}/search`;
+
+    return this.http.post(
+            url,
+            { page: 1,
+              query: search,
+              includeAdult: 'true'
+            },
+            {
+              responseType: 'json'
+          }).pipe(
+          catchError(this.handleError),
+          map(this.jsonDataToMoviesDTO)
+    )
+  }
 
   getAllUpcoming(page: number = 1): Observable<MovieDTO[]>{
     const url = `${API_CONFIG.baseUrl}/${page}`;
