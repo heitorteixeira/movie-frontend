@@ -13,13 +13,13 @@
 <div class="container" style="scroll-margin-top: 50px;">
     <div class="row"
             infiniteScroll
-            [infiniteScrollDistance]="2"
-            [infiniteScrollThrottle]="50"
+            [infiniteScrollDistance]="4"
+            [infiniteScrollThrottle]="40"
             (scrolled)="onScroll()" 
             >
         <div class="col-lg-3 col-md-6" *ngFor="let movie of movies">
             <div class="card w-100 p-3 border-light" style="width: 18rem;" (click)="selectMovie(movie)" style="cursor: pointer">
-                <img src="{{baseUrl}}/sid/{{movie.id}}" 
+                <img src="{{baseUrl}}/sid{{movie.posterPath}}" 
                     class="card-img-top" 
                     onError="this.src='assets/images/image-not-found.jpg';">
                 <div class="card-body">
