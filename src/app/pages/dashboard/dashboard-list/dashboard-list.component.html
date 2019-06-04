@@ -1,32 +1,30 @@
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" routerLink="/">Hmovie</a>
+<nav class="navbar navbar-inverse fixed-top">
+    <a class="navbar-brand" style="color:white" [routerLink]="['dashboard/', {new: true}]">Hmovie</a>
     <form class="form-inline" >
+        <button class="btn btn-outline-success my-2 my-sm-0" id="play_button" (click)="getUpcomingMovies()" type="button">Upcoming</button>
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search" #search>
         <button class="btn btn-outline-success my-2 my-sm-0" (click)="searchMovie()" type="button">Search</button>
     </form>
+    <br>
 </nav>
-<div class="container">
-    <h4 class="text-center">Upcoming Movies</h4>
+<br><br><br>
+<div class="action" *ngIf="searching==true">Searching</div>
+<div class="action" *ngIf="searching==false">Upcoming Movies</div>
+<div class="container" style="scroll-margin-top: 50px;">
     <div class="row"
             infiniteScroll
             [infiniteScrollDistance]="2"
             [infiniteScrollThrottle]="50"
             (scrolled)="onScroll()" 
-            style="overflow: scroll;">
-
+            >
         <div class="col-lg-3 col-md-6" *ngFor="let movie of movies">
-            <div class="card card-cascade" >
-                <div class="view view-cascade overlay">
-                    <a (click)="selectMovie(movie)">
-                        <img src="{{imageUrl}}w185{{movie.posterPath}}" 
-                            class="card-img-top" 
-                            onError="this.src='assets/images/image-not-found.jpg';">
-                    </a>
-                    <div class="mask rgba-white-slight">{{movie.releaseDate}}</div>
-                    
-                </div>
-                <div class="card-body card-body-cascade text-center">
-                    <h4 class="card-title"><strong>{{movie.originalTitle}}</strong></h4>
+            <div class="card w-100 p-3 border-light" style="width: 18rem;" (click)="selectMovie(movie)" style="cursor: pointer">
+                <img src="{{imageUrl}}w185{{movie.posterPath}}" 
+                    class="card-img-top" 
+                    onError="this.src='assets/images/image-not-found.jpg';">
+                <div class="card-body">
+                    <h5 class="card-title"><strong>{{movie.originalTitle}}</strong></h5>
+                    <div class="small rgba-white-slight">{{movie.releaseDate}}</div>
                     <i class="glyphicon small" *ngFor="let genre of movie.genres">{{genre.name + ' '}}</i>
                 </div>
             </div>

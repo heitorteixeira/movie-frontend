@@ -6,6 +6,7 @@ import { DashboardDetailComponent } from './dashboard-detail/dashboard-detail.co
 
 const routes: Routes = [
   {path: '', component: DashboardListComponent},
+  {path: 'dashboard', component: DashboardListComponent},
   {path: 'detail', component: DashboardDetailComponent}
 ];
 

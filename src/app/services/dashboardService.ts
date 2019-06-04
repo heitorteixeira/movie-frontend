@@ -16,12 +16,12 @@ export class DashboardService {
 
   constructor(private http: HttpClient) {}
 
-  search(search: string): Observable<MovieDTO[]>{
+  search(search: string, page: number = 1): Observable<MovieDTO[]>{
     const url = `${API_CONFIG.baseUrl}/search`;
 
     return this.http.post(
             url,
-            { page: 1,
+            { page: page,
               query: search,
               includeAdult: 'true'
             },

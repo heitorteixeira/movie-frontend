@@ -15,15 +15,8 @@ export class DashboardDetailComponent implements OnInit {
   movie: MovieDTO;
   imageUrl: string = API_CONFIG.imagesUrl;
 
-  constructor(private route: ActivatedRoute,
-              public data: StorageService,
-              private router: Router) { 
-
-    this.route.queryParams.subscribe(params => {
-      this.movie = params["movie"];
-  });
-
-  }
+  constructor(public data: StorageService,
+              private router: Router) { }
 
   ngOnInit() {
     this.movie = this.data.getMovie();
