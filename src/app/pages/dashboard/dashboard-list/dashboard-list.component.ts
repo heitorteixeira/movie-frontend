@@ -15,7 +15,7 @@ export class DashboardListComponent implements OnInit {
 
   @ViewChild('search') search:ElementRef;
   movies: MovieDTO[] = [];
-  imageUrl: string = API_CONFIG.imagesUrl;
+  baseUrl: string = API_CONFIG.baseUrl;
   page: number = 1;
   pageSearch: number = 1;
   searching: boolean = false;

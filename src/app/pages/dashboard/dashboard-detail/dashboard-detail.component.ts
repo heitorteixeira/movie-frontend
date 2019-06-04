@@ -13,7 +13,7 @@ import { StorageService } from '../../../services/storageService';
 export class DashboardDetailComponent implements OnInit {
 
   movie: MovieDTO;
-  imageUrl: string = API_CONFIG.imagesUrl;
+  baseUrl: string = API_CONFIG.baseUrl;
 
   constructor(public data: StorageService,
               private router: Router) { }
